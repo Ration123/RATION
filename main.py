@@ -19,7 +19,7 @@ logo_url = "https://github.com/Ration123/RATION/raw/main/title"
 logo = load_image_from_url(logo_url)
 
 if logo:
-    st.image(logo, width=200)  # Increased logo size to 200
+    st.image(logo, width=1000 ,length=300)  # Increased logo size to 200
 else:
     st.write("Unable to load Tamil Nadu Government logo.")
 
