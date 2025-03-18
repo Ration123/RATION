@@ -2,9 +2,26 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
+import requests
+from io import BytesIO
 
-# Load Tamil Nadu Government logo
-logo = Image.open('path_to_tamilnadu_logo.png')
+# Load Tamil Nadu Government logo from GitHub
+def load_image_from_url(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return Image.open(BytesIO(response.content))
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error loading image: {e}")
+        return None
+
+logo_url = "https://github.com/Ration123/RATION/raw/main/title"
+logo = load_image_from_url(logo_url)
+
+if logo:
+    st.image(logo, width=100)
+else:
+    st.write("Unable to load Tamil Nadu Government logo.")
 
 # Placeholder data
 users = {'user1': {'password': 'pass1', 'shop_number': '101'}}
@@ -18,7 +35,6 @@ def authenticate(username, password, shop_number):
     return False
 
 # Streamlit UI
-st.image(logo, width=100)
 st.title('Tamil Nadu Ration Shop Management')
 
 # Login Page
