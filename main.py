@@ -16,14 +16,17 @@ def set_background():
             background-attachment: fixed;
             background-position: center;
         }
-        .main > div {
-            background-color: rgba(0, 0, 0, 0.7);
+        .block-container {
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 2rem;
             border-radius: 20px;
+        }
+        .block-container .element-container {
             color: white;
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 # === Title Image ===
 def show_title_image():
