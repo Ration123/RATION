@@ -15,7 +15,7 @@ def set_background():
         .main > div {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 20px;
             color: white;
         }
         </style>
