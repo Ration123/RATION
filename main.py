@@ -1,102 +1,133 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
-from PIL import Image
-import requests
-from io import BytesIO
 
-# Load Tamil Nadu Government logo from GitHub
-def load_image_from_url(url):
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return Image.open(BytesIO(response.content))
-    except requests.exceptions.RequestException as e:
-        st.error(f"Error loading image: {e}")
-        return None
+# Inject background image using CSS
+def set_background():
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://img.freepik.com/free-photo/sacks-rice-flour-sugar-with-wooden-bowls-rustic-table_1150-20515.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: white;
+        }}
+        .main > div {{
+            background-color: rgba(0, 0, 0, 0.65);
+            padding: 2rem;
+            border-radius: 10px;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-logo_url = "https://github.com/Ration123/RATION/raw/main/title"
-logo = load_image_from_url(logo_url)
+set_background()
 
-if logo:
-    st.image(logo, width=1000 )  # Increased logo size to 200
-else:
-    st.write("Unable to load Tamil Nadu Government logo.")
+# Sidebar navigation
+st.sidebar.title("Tamil Nadu Ration Shop")
+menu = st.sidebar.radio("🔸 Menu", [
+    "🏠 Home Page",
+    "📄 Ration Card Services",
+    "📦 Stock Availability",
+    "📍 Ration Shop Locator",
+    "🔐 Login / Signup",
+    "📝 Grievance / Feedback",
+    "🌐 Language Switcher"
+])
 
-# Placeholder data
-users = {'user1': {'password': 'pass1', 'shop_number': '101'}}
-stock_data = {'Rice': 100, 'Sugar': 50, 'Wheat': 80}
+# 1. Home Page
+if menu == "🏠 Home Page":
+    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Tamil_Nadu_Logo.svg/800px-Tamil_Nadu_Logo.svg.png", width=100)
+    st.title("Welcome to Tamil Nadu Ration Shop Portal")
+    st.write("""
+    This portal is developed for Tamil Nadu citizens to:
+    - Apply or modify ration cards
+    - Track real-time stock in ration shops
+    - Locate nearest ration shops
+    - Submit grievances and suggestions
+    """)
+    st.subheader("📢 Latest Announcements")
+    st.success("Smart Ration Card updates will be available from May 1st.")
+    st.info("Biometric verification will be mandatory from June.")
 
-# Authentication function
-def authenticate(username, password, shop_number):
-    user = users.get(username)
-    if user and user['password'] == password and user['shop_number'] == shop_number:
-        return True
-    return False
+# 2. Ration Card Services
+elif menu == "📄 Ration Card Services":
+    st.header("📄 Ration Card Services")
+    service = st.selectbox("Choose Service", ["Apply for Ration Card", "Modify Existing Card", "Check Application Status"])
 
-# Streamlit UI
-st.title('Tamil Nadu Ration Shop Management')
+    if service == "Apply for Ration Card":
+        st.text_input("Full Name")
+        st.text_area("Address")
+        st.text_input("Aadhaar Number")
+        st.number_input("Number of Family Members", 1, 20)
+        if st.button("Submit Application"):
+            st.success("Application submitted successfully.")
+    elif service == "Modify Existing Card":
+        st.text_input("Ration Card Number")
+        st.selectbox("Modification", ["Add Member", "Remove Member", "Change Address"])
+        st.text_area("Details of Change")
+        if st.button("Submit Modification"):
+            st.success("Modification request submitted.")
+    elif service == "Check Application Status":
+        app_id = st.text_input("Enter Application Number")
+        if st.button("Check Status"):
+            st.info("Your application is under review. Please check back later.")
 
-# Login Page
-if 'logged_in' not in st.session_state:
-    st.session_state.logged_in = False
+# 3. Stock Availability
+elif menu == "📦 Stock Availability":
+    st.header("📦 Real-Time Stock")
+    shop = st.selectbox("Select Ration Shop", ["Shop 101 - Chennai", "Shop 102 - Madurai", "Shop 103 - Coimbatore"])
+    stock = {
+        "Shop 101 - Chennai": {"Rice": "Available", "Sugar": "Low", "Wheat": "Out of Stock"},
+        "Shop 102 - Madurai": {"Rice": "Available", "Sugar": "Available", "Wheat": "Available"},
+        "Shop 103 - Coimbatore": {"Rice": "Low", "Sugar": "Available", "Wheat": "Available"},
+    }
+    for item, status in stock[shop].items():
+        st.write(f"🛒 **{item}**: {status}")
 
-if not st.session_state.logged_in:
-    st.subheader('Login')
-    username = st.text_input('Username')
-    password = st.text_input('Password', type='password')
-    shop_number = st.text_input('Shop Number')
-    
-    if st.button('Login'):
-        if authenticate(username, password, shop_number):
-            st.session_state.logged_in = True
-            st.session_state.username = username
-            st.success('Login successful!')
-        else:
-            st.error('Invalid credentials')
-else:
-    # Dashboard
-    st.sidebar.title('Dashboard')
-    option = st.sidebar.selectbox('Choose an option', ['View Stock', 'Purchase Verification', 'Order & Pay', 'Track Delivery'])
+# 4. Ration Shop Locator
+elif menu == "📍 Ration Shop Locator":
+    st.header("📍 Locate Your Nearest Ration Shop")
+    st.map()  # Show placeholder map
+    st.markdown("""
+    **Example Locations**
+    - Shop 101: 123 MG Road, Chennai | 📞 044-12345678  
+    - Shop 102: 45 Anna Nagar, Madurai | 📞 0452-2345678  
+    - Shop 103: 78 Gandhipuram, Coimbatore | 📞 0422-3456789  
+    """)
 
-    if option == 'View Stock':
-        st.subheader('Stock Details')
-        
-        items = list(stock_data.keys())
-        quantities = list(stock_data.values())
-        
-        fig, ax = plt.subplots()
-        bars = ax.bar(items, quantities, color='skyblue')
-        
-        # Annotate bars with values
-        for bar, qty in zip(bars, quantities):
-            ax.annotate(f'{qty}', xy=(bar.get_x() + bar.get_width() / 2, bar.get_height()),
-                        xytext=(0, 5), textcoords='offset points', ha='center', va='bottom')
-        
-        ax.set_xlabel('Items')
-        ax.set_ylabel('Remaining Stock')
-        ax.set_title('Stock Overview')
-        st.pyplot(fig)
+# 5. Login / Signup
+elif menu == "🔐 Login / Signup":
+    st.header("🔐 Login Portal")
+    role = st.radio("Login as:", ["Customer", "Staff/Admin"])
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        st.success(f"Welcome {username}!")
 
-    elif option == 'Purchase Verification':
-        st.subheader('Check Purchase Details')
-      
+    st.markdown("---")
+    st.subheader("🆕 New User? Sign up here:")
+    new_user = st.text_input("New Username")
+    new_pass = st.text_input("New Password", type="password")
+    if st.button("Signup"):
+        st.success("Account created successfully!")
 
-    elif option == 'Order & Pay':
-        st.subheader('Order and Payment')
-        item = st.selectbox('Select Item', list(stock_data.keys()))
-        quantity = st.number_input('Quantity', min_value=1)
-        if st.button('Place Order'):
-            if quantity <= stock_data[item]:
-                stock_data[item] -= quantity
-                st.success(f'Order placed for {quantity} {item}(s)')
-            else:
-                st.error('Insufficient stock')
+# 6. Grievance / Feedback
+elif menu == "📝 Grievance / Feedback":
+    st.header("📝 Submit Your Feedback or Complaint")
+    st.text_input("Full Name")
+    st.text_input("Email or Contact Number")
+    st.text_area("Your Complaint / Feedback")
+    if st.button("Submit"):
+        st.success("Thanks! Your message has been received.")
 
-    elif option == 'Track Delivery':
-        st.subheader('Track your Delivery')
-        st.write('Feature under development.')
-
-    if st.sidebar.button('Logout'):
-        st.session_state.clear()
-        st.rerun()
+# 7. Language Switcher
+elif menu == "🌐 Language Switcher":
+    st.header("🌐 Switch Language")
+    st.markdown("Choose your preferred language:")
+    lang = st.radio("Select Language", ["English", "தமிழ் (Tamil)"])
+    if lang == "தமிழ் (Tamil)":
+        st.success("Interface will be shown in Tamil (to be implemented).")
+    else:
+        st.info("Currently viewing in English.")
