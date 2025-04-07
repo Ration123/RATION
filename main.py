@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# === Dummy Credentials ===
+users = {"user1": "pass123", "user2": "pass456"}
+admins = {"admin1": "admin123"}
+
 # === Set Background ===
 def set_background():
     st.markdown("""
@@ -82,21 +86,26 @@ if menu == "🏠 Home":
     st.title(t("Welcome to Tamil Nadu Ration Shop Portal"))
     st.write(t("This portal allows citizens to:"))
     st.markdown(t("""  
+        - Apply/modify ration cards  
         - Track shop stock  
         - Submit complaints  
         - Place orders & track status
     """))
-    
+    st.info(t("Smart Ration Card updates from May 1st."))
+    st.warning(t("Biometric verification required from June."))
 
 elif menu == "📊 Stock Availability":
     show_title_image()
     st.header(t("Real-Time Stock"))
     shop = st.selectbox(t("Select Shop"), ["Shop 101 - Chennai", "Shop 102 - Madurai", "Shop 103 - Coimbatore"])
+    
+    # Stock Data
     data = {
         "Shop 101 - Chennai": {"Rice": 100, "Sugar": 40, "Wheat": 0},
         "Shop 102 - Madurai": {"Rice": 80, "Sugar": 75, "Wheat": 60},
         "Shop 103 - Coimbatore": {"Rice": 30, "Sugar": 60, "Wheat": 90},
     }
+    
     df = pd.DataFrame(data[shop].items(), columns=["Item", "Quantity"])
     fig, ax = plt.subplots()
     ax.bar(df["Item"], df["Quantity"], color=['orange', 'green', 'blue'])
@@ -104,29 +113,47 @@ elif menu == "📊 Stock Availability":
     ax.set_ylabel("Quantity")
     st.pyplot(fig)
 
+    # Shop Locations
+    shop_map_urls = {
+        "Shop 101 - Chennai": "https://www.google.com/maps?q=13.0827,80.2707&z=15&output=embed",
+        "Shop 102 - Madurai": "https://www.google.com/maps?q=9.9252,78.1198&z=15&output=embed",
+        "Shop 103 - Coimbatore": "https://www.google.com/maps?q=11.0168,76.9558&z=15&output=embed",
+    }
+
+    st.markdown(f"""
+    <iframe width="100%" height="300" frameborder="0" style="border:0"
+    src="{shop_map_urls[shop]}" allowfullscreen>
+    </iframe>
+    """, unsafe_allow_html=True)
+
 elif menu == "🔐 Login / Signup":
     show_title_image()
     st.header(t("Login Portal"))
     role = st.radio(t("Login as:"), [t("User"), t("Admin")])
     username = st.text_input(t("Username"))
     password = st.text_input(t("Password"), type="password")
+
     if st.button(t("Login")):
-        st.success(f"{t('Welcome')} {username}!")
-        if role == t("User"):
-            st.subheader(t("Card Type: APL"))
-            st.write(t("🧾 Order Status: Received this month ✔️"))
-            st.write(t("💸 Pay via GPay: UPI@gov"))
-            st.button(t("Place Order"))
+        if (role == t("User") and users.get(username) == password) or (role == t("Admin") and admins.get(username) == password):
+            st.success(f"{t('Welcome')} {username}!")
+            if role == t("User"):
+                st.subheader(t("Card Type: APL"))
+                st.write(t("🧾 Order Status: Received this month ✔️"))
+                st.write(t("💸 Pay via GPay: UPI@gov"))
+                st.button(t("Place Order"))
+            else:
+                st.subheader(t("Shop Purchase Log"))
+                st.write("🧍‍♂️ Ramesh - Shop 101 - Rice - April 5")
+                st.write("🧍‍♀️ Sita - Shop 102 - Wheat - April 6")
         else:
-            st.subheader(t("Shop Purchase Log"))
-            st.write("🧍‍♂️ Ramesh - Shop 101 - Rice - April 5")
-            st.write("🧍‍♀️ Sita - Shop 102 - Wheat - April 6")
+            st.error("Invalid username or password")
 
     st.markdown("---")
     st.subheader(t("New User Signup"))
-    st.text_input(t("New Username"))
-    st.text_input(t("New Password"), type="password")
+    new_user = st.text_input(t("New Username"))
+    new_pass = st.text_input(t("New Password"), type="password")
     if st.button(t("Signup")):
+        # Just a mock message; no real signup logic
         st.success(t("Account created."))
 
 elif menu == "📬 Grievance":
