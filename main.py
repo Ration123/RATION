@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import matplotlib.pyplot as plt
 
 # === Set Background ===
 def set_background():
@@ -37,29 +37,9 @@ def t(text):
         "- Place orders & track status": "- ஆர்டரை இட & நிலையை பின்தொடர",
         "Smart Ration Card updates from May 1st.": "ஸ்மார்ட் ரேஷன் அட்டை மே 1 முதல் புதுப்பிக்கப்படும்.",
         "Biometric verification required from June.": "ஜூன் மாதம் முதல் பயோமெட்ரிக் சரிபார்ப்பு தேவையாகும்.",
-        "Ration Card Services": "ரேஷன் கார்ட் சேவைகள்",
-        "Apply for Ration Card": "ரேஷன் கார்டுக்கு விண்ணப்பிக்கவும்",
-        "Modify Existing Card": "ஏற்கனவே உள்ள கார்டை மாற்றவும்",
-        "Check Application Status": "விண்ணப்ப நிலையை சரிபார்க்கவும்",
-        "Full Name": "முழுப் பெயர்",
-        "Address": "முகவரி",
-        "Family Members": "குடும்ப உறுப்பினர்கள்",
-        "Submit": "சமர்ப்பிக்கவும்",
-        "Application submitted successfully.": "விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது.",
-        "Ration Card Number": "ரேஷன் கார்டு எண்",
-        "Change": "மாற்றம்",
-        "Add Member": "உறுப்பினரைச் சேர்க்கவும்",
-        "Remove Member": "உறுப்பினரை நீக்கவும்",
-        "Change Address": "முகவரியை மாற்றவும்",
-        "Modification sent.": "மாற்றம் அனுப்பப்பட்டது.",
-        "Application Number": "விண்ணப்ப எண்",
-        "Check Status": "நிலையை சரிபார்க்கவும்",
-        "Your application is under review.": "உங்கள் விண்ணப்பம் பரிசீலனையில் உள்ளது.",
         "Real-Time Stock": "நிகழ்நேர பொருள் நிலை",
         "Select Shop": "கடையைத் தேர்ந்தெடுக்கவும்",
         "Current Stock Levels": "தற்போதைய இருப்பு நிலை",
-        "Ration Shop Locator": "ரேஷன் கடை தேடல்",
-        "Login Portal": "உள்நுழைவு போர்டல்",
         "Login as:": "உள்நுழைவு பயனராக:",
         "User": "பயனர்",
         "Admin": "நிர்வாகி",
@@ -78,24 +58,23 @@ def t(text):
         "Signup": "பதிவு",
         "Account created.": "கணக்கு உருவாக்கப்பட்டது.",
         "Submit Complaint or Feedback": "புகார் அல்லது கருத்தை சமர்ப்பிக்கவும்",
+        "Full Name": "முழுப் பெயர்",
         "Contact Email / Phone": "தொடர்பு மின்னஞ்சல் / தொலைபேசி",
         "Your Message": "உங்கள் செய்தி",
         "Thank you! We received your feedback.": "நன்றி! உங்கள் கருத்தை பெற்றோம்.",
         "Language Switcher": "மொழி மாற்று",
-        "Use the checkbox in the sidebar to toggle between Tamil and English.": "தமிழ் மற்றும் ஆங்கிலத்தை மாற்ற பக்கப்பட்டி பெட்டியைப் பயன்படுத்தவும்.",
+        "Use the checkbox in the sidebar to toggle between Tamil and English.": "தமிழ் மற்றும் ஆங்கிலத்தை மாற்ற பக்கப்பட்டி பெட்டியைப் பயன்படுத்தவும்."
     }.get(text, text) if lang_toggle else text
 
 # === Initialize ===
 st.set_page_config(page_title="Tamil Nadu Ration Shop", layout="wide")
 set_background()
 
-# === Sidebar Menu ===
+# === Sidebar ===
 st.sidebar.title("🛒 தமிழ்நாடு ரேஷன் கடை")
 lang_toggle = st.sidebar.checkbox("Switch to Tamil")
 menu = st.sidebar.radio("📂 Menu", [
-    "🏠 Home", "📊 Stock Availability", "📍 Shop Locator",
-    "🔐 Login / Signup", "📬 Grievance", "🌐 Language"
-])
+    "🏠 Home", "📊 Stock Availability", "🔐 Login / Signup", "📬 Grievance", "🌐 Language"])
 
 # === Pages ===
 if menu == "🏠 Home":
@@ -111,8 +90,6 @@ if menu == "🏠 Home":
     st.success(t("Smart Ration Card updates from May 1st."))
     st.info(t("Biometric verification required from June."))
 
-
-
 elif menu == "📊 Stock Availability":
     show_title_image()
     st.header(t("Real-Time Stock"))
@@ -123,18 +100,11 @@ elif menu == "📊 Stock Availability":
         "Shop 103 - Coimbatore": {"Rice": 30, "Sugar": 60, "Wheat": 90},
     }
     df = pd.DataFrame(data[shop].items(), columns=["Item", "Quantity"])
-    fig = px.bar(df, x="Item", y="Quantity", color="Item", title=t("Current Stock Levels"))
-    st.plotly_chart(fig)
-
-elif menu == "📍 Shop Locator":
-    show_title_image()
-    st.header(t("Ration Shop Locator"))
-    st.map(pd.DataFrame({
-        'lat': [13.0827, 9.9252, 11.0168],
-        'lon': [80.2707, 78.1198, 76.9558],
-        'shop': ['Chennai', 'Madurai', 'Coimbatore']
-    }))
-    st.markdown("📞 Chennai: 044-12345678  |  Madurai: 0452-2345678  |  Coimbatore: 0422-3456789")
+    fig, ax = plt.subplots()
+    ax.bar(df["Item"], df["Quantity"], color=['orange', 'green', 'blue'])
+    ax.set_title(t("Current Stock Levels"))
+    ax.set_ylabel("Quantity")
+    st.pyplot(fig)
 
 elif menu == "🔐 Login / Signup":
     show_title_image()
