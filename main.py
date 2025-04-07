@@ -93,7 +93,7 @@ set_background()
 st.sidebar.title("🛒 தமிழ்நாடு ரேஷன் கடை")
 lang_toggle = st.sidebar.checkbox("Switch to Tamil")
 menu = st.sidebar.radio("📂 Menu", [
-    "🏠 Home", "📄 Ration Card Services", "📊 Stock Availability", "📍 Shop Locator",
+    "🏠 Home", "📊 Stock Availability", "📍 Shop Locator",
     "🔐 Login / Signup", "📬 Grievance", "🌐 Language"
 ])
 
@@ -111,27 +111,7 @@ if menu == "🏠 Home":
     st.success(t("Smart Ration Card updates from May 1st."))
     st.info(t("Biometric verification required from June."))
 
-elif menu == "📄 Ration Card Services":
-    show_title_image()
-    st.header(t("Ration Card Services"))
-    option = st.selectbox(t("Choose Service"), [t("Apply for Ration Card"), t("Modify Existing Card"), t("Check Application Status")])
-    if option == t("Apply for Ration Card"):
-        st.text_input(t("Full Name"))
-        st.text_area(t("Address"))
-        st.text_input("Aadhaar")
-        st.number_input(t("Family Members"), 1, 20)
-        if st.button(t("Submit")):
-            st.success(t("Application submitted successfully."))
-    elif option == t("Modify Existing Card"):
-        st.text_input(t("Ration Card Number"))
-        st.selectbox(t("Change"), [t("Add Member"), t("Remove Member"), t("Change Address")])
-        st.text_area(t("Details"))
-        if st.button(t("Submit")):
-            st.success(t("Modification sent."))
-    elif option == t("Check Application Status"):
-        st.text_input(t("Application Number"))
-        if st.button(t("Check Status")):
-            st.info(t("Your application is under review."))
+
 
 elif menu == "📊 Stock Availability":
     show_title_image()
