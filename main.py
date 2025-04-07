@@ -81,14 +81,12 @@ if menu == "🏠 Home":
     show_title_image()
     st.title(t("Welcome to Tamil Nadu Ration Shop Portal"))
     st.write(t("This portal allows citizens to:"))
-    st.markdown(t("""
-        - Apply/modify ration cards  
+    st.markdown(t("""  
         - Track shop stock  
         - Submit complaints  
         - Place orders & track status
     """))
-    st.success(t("Smart Ration Card updates from May 1st."))
-    st.info(t("Biometric verification required from June."))
+    
 
 elif menu == "📊 Stock Availability":
     show_title_image()
