@@ -10,47 +10,47 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
-        /* Set the full-screen background image */
+        /* Background Image Styling */
         html, body, .stApp {
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: center;
+            background-position: center 80px; /* Moves image down a bit */
             height: 100%;
             width: 100%;
-            overflow: auto;
         }
 
-        /* Make content container semi-transparent and scrollable */
+        /* Transparent container with blur effect */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.1); /* More transparent */
+            background-color: rgba(255, 255, 255, 0.12); /* Transparent */
             padding: 2rem;
             border-radius: 20px;
-            backdrop-filter: blur(4px); /* Optional blur for glassy effect */
+            backdrop-filter: blur(2px);
+            margin-top: 20px; /* Content also pushed down */
         }
 
-        /* Make text black and inputs more readable */
+        /* Improve text and input visibility */
         .stMarkdown, .stTextInput, .stTextArea, .stSelectbox, .stRadio, .stButton {
             color: black !important;
         }
 
         input, textarea {
-            background-color: rgba(255, 255, 255, 0.8) !important;
+            background-color: rgba(255, 255, 255, 0.85) !important;
             color: black !important;
         }
 
-        /* Hide Streamlit default UI elements */
-        footer, header, .css-164nlkn, .viewerBadge_container__1QSob {
+        /* Hide Streamlit UI Elements */
+        footer, header, .viewerBadge_container__1QSob, .st-emotion-cache-1v0mbdj {
             display: none !important;
         }
 
-        /* Optional: remove padding above */
         .stApp {
-            padding-top: 20px;
+            padding-top: 30px;
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 
 
