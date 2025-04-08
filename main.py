@@ -10,27 +10,23 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
-        /* Background Image Styling */
         html, body, .stApp {
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
             background-size: cover;
             background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center 150px;  /* Move image further down */
-            height: 100%;
-            width: 100%;
+            background-position: top center;
+            background-attachment: scroll; /* Scrolls with content */
+            min-height: 100vh;
         }
 
-        /* Transparent container with blur effect */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.10); /* more transparent */
+            background-color: rgba(255, 255, 255, 0.15); /* transparent white */
             padding: 2rem;
             border-radius: 20px;
             backdrop-filter: blur(4px);
-            margin-top: 40px; /* Push content down */
+            margin-top: 50px;
         }
 
-        /* Improve text and input visibility */
         .stMarkdown, .stTextInput, .stTextArea, .stSelectbox, .stRadio, .stButton {
             color: black !important;
         }
@@ -40,17 +36,15 @@ def set_background():
             color: black !important;
         }
 
-        /* Hide Streamlit UI Elements */
-        footer, header, .viewerBadge_container__1QSob, .st-emotion-cache-1v0mbdj {
+        footer, header, .st-emotion-cache-1v0mbdj, .viewerBadge_container__1QSob {
             display: none !important;
         }
 
-        .stApp {
-            padding-top: 50px;
+        .css-164nlkn {
+            display: none !important; /* Extra GitHub icon area */
         }
         </style>
     """, unsafe_allow_html=True)
-
 
 
 
