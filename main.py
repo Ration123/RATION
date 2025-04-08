@@ -116,12 +116,22 @@ if menu == "🏠 Home":
     st.markdown(f"<p style='color:black; font-weight:700; font-size:18px;'>{t('This portal allows citizens to:')}</p>", unsafe_allow_html=True)
 
     st.markdown(f"""
-      <ul style='color:black; font-weight:700; font-size:16px;'>
-         <li>{t('Track shop stock')}</li>
-         <li>{t('Submit complaints')}</li>
-         <li>{t('Place orders & track status')}</li>
-      </ul>
-          """, unsafe_allow_html=True)
+    <ul style='
+        color: black;
+        font-weight: 700;
+        font-size: 16px;
+        list-style-type: disc;
+        margin-left: 20px;
+        background: none;
+        padding: 0;
+        border: none;
+    '>
+        <li>{t('Track shop stock')}</li>
+        <li>{t('Submit complaints')}</li>
+        <li>{t('Place orders & track status')}</li>
+    </ul>
+      """, unsafe_allow_html=True)
+
 
 
   
