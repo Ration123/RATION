@@ -16,18 +16,18 @@ def set_background():
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: center 80px; /* Moves image down a bit */
+            background-position: center 150px;  /* Move image further down */
             height: 100%;
             width: 100%;
         }
 
         /* Transparent container with blur effect */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.12); /* Transparent */
+            background-color: rgba(255, 255, 255, 0.10); /* more transparent */
             padding: 2rem;
             border-radius: 20px;
-            backdrop-filter: blur(2px);
-            margin-top: 20px; /* Content also pushed down */
+            backdrop-filter: blur(4px);
+            margin-top: 40px; /* Push content down */
         }
 
         /* Improve text and input visibility */
@@ -46,7 +46,7 @@ def set_background():
         }
 
         .stApp {
-            padding-top: 30px;
+            padding-top: 50px;
         }
         </style>
     """, unsafe_allow_html=True)
