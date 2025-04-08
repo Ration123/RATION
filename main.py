@@ -14,18 +14,26 @@ def set_background():
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
             background-size: cover;
             background-attachment: fixed;
+            background-repeat: no-repeat;
             background-position: center;
         }
+
         .block-container {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(255, 255, 255, 0.2); /* light transparent overlay */
             padding: 2rem;
             border-radius: 20px;
         }
+
         .block-container .element-container {
             color: white;
         }
+
+        .stMarkdown, .stHeader, .stTextInput, .stButton, .stSelectbox, .stRadio {
+            color: white !important;
+        }
         </style>
     """, unsafe_allow_html=True)
+
 
 
 # === Title Image ===
