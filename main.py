@@ -10,18 +10,26 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
+        /* Background image setup */
         html, body, [class*="stApp"] {
-            background: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg") no-repeat center center fixed;
+            background: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg") no-repeat center top fixed;
             background-size: cover;
         }
 
-        .block-container {
-            background-color: rgba(255, 255, 255, 0.3);  /* Adjust transparency here */
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        /* Move background image slightly down using padding */
+        .stApp {
+            padding-top: 60px;
         }
 
+        /* Transparent white container for content readability */
+        .block-container {
+            background-color: rgba(255, 255, 255, 0.15);  /* Increased transparency */
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        }
+
+        /* Set text color */
         .stMarkdown, .stHeader, .stTextInput, .stButton, .stSelectbox, .stRadio, .stTextArea {
             color: black !important;
         }
@@ -31,11 +39,17 @@ def set_background():
             color: black !important;
         }
 
-        .css-1y4p8pa, .css-1cpxqw2 {  /* Applies to titles/text blocks in newer Streamlit versions */
+        .css-1y4p8pa, .css-1cpxqw2 {
             color: black !important;
+        }
+
+        /* Hide the Streamlit footer and GitHub button */
+        footer, .css-164nlkn.egzxvld1 {
+            visibility: hidden;
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 
 
