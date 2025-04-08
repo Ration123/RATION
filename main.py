@@ -15,7 +15,7 @@ def set_background():
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
             background-size: cover;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-attachment: scroll;
             background-position: center 200px;  /* Move image further down */
             height: 100%;
             width: 100%;
