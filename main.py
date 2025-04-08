@@ -10,45 +10,47 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
-        /* Background image setup */
-        html, body, [class*="stApp"] {
-            background: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg") no-repeat center top fixed;
+        /* Set background image properly and scroll content */
+        html, body, .stApp {
+            background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
+            background-attachment: fixed;
             background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
         }
 
-        /* Move background image slightly down using padding */
-        .stApp {
-            padding-top: 60px;
-        }
-
-        /* Transparent white container for content readability */
+        /* Transparent block container for content */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.15);  /* Increased transparency */
+            background-color: rgba(255, 255, 255, 0.15); /* Light transparent white */
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+            box-shadow: 0 0 25px rgba(0,0,0,0.2);
         }
 
-        /* Set text color */
+        /* Text and input styles */
         .stMarkdown, .stHeader, .stTextInput, .stButton, .stSelectbox, .stRadio, .stTextArea {
             color: black !important;
         }
 
+        /* Light background for inputs */
         input, textarea {
-            background-color: rgba(255, 255, 255, 0.85) !important;
+            background-color: rgba(255, 255, 255, 0.8) !important;
             color: black !important;
         }
 
-        .css-1y4p8pa, .css-1cpxqw2 {
-            color: black !important;
-        }
-
-        /* Hide the Streamlit footer and GitHub button */
-        footer, .css-164nlkn.egzxvld1 {
+        /* Hide footer and GitHub icon */
+        footer, header .stDeployButton, .css-164nlkn, .viewerBadge_container__1QSob {
+            display: none !important;
             visibility: hidden;
+        }
+
+        /* Optional: remove padding at the top */
+        .stApp {
+            padding-top: 30px;
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 
 
