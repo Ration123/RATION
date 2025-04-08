@@ -10,36 +10,37 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
+        /* Background Image Styling */
         html, body, .stApp {
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
-            background-size: contain; /* Show full image without cropping */
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: center top; /* Adjusted position */
-            background-attachment: local; /* Let content scroll over image */
+            background-attachment: fixed;
+            background-position: center 150px;  /* Move image further down */
             height: 100%;
             width: 100%;
         }
 
-        /* Content container styling */
+        /* Transparent container with blur effect */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.2); /* Increased transparency */
+            background-color: rgba(255, 255, 255, 0.10); /* more transparent */
             padding: 2rem;
             border-radius: 20px;
-            backdrop-filter: blur(3px);
-            margin-top: 300px;  /* Push content down for full image view */
+            backdrop-filter: blur(4px);
+            margin-top: 40px; /* Push content down */
         }
 
-        /* Improve text readability */
+        /* Improve text and input visibility */
         .stMarkdown, .stTextInput, .stTextArea, .stSelectbox, .stRadio, .stButton {
             color: black !important;
         }
 
         input, textarea {
-            background-color: rgba(255, 255, 255, 0.8) !important;
+            background-color: rgba(255, 255, 255, 0.85) !important;
             color: black !important;
         }
 
-        /* Hide Streamlit menu and footer */
+        /* Hide Streamlit UI Elements */
         footer, header, .viewerBadge_container__1QSob, .st-emotion-cache-1v0mbdj {
             display: none !important;
         }
@@ -49,8 +50,6 @@ def set_background():
         }
         </style>
     """, unsafe_allow_html=True)
-
-
 
 
 
