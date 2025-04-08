@@ -94,13 +94,16 @@ menu = st.sidebar.radio("📂 Menu", [
 # === Pages ===
 if menu == "🏠 Home":
     show_title_image()
-    st.title(t("Welcome to Tamil Nadu Ration Shop Portal"))
-    st.write(t("This portal allows citizens to:"))
-    st.markdown(t(""" 
-        - Track shop stock  
-        - Submit complaints  
-        - Place orders & track status
-    """))
+st.markdown(f"<h1 style='color:black; font-weight:bold;'>{t('Welcome to Tamil Nadu Ration Shop Portal')}</h1>", unsafe_allow_html=True)
+st.markdown(f"<p style='color:black; font-weight:bold;'>{t('This portal allows citizens to:')}</p>", unsafe_allow_html=True)
+st.markdown(t("""
+    <ul style='color:black; font-weight:bold;'>
+        <li>Track shop stock</li>
+        <li>Submit complaints</li>
+        <li>Place orders & track status</li>
+    </ul>
+"""), unsafe_allow_html=True)
+
   
 
 elif menu == "📊 Stock Availability":
