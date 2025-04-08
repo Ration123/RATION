@@ -11,35 +11,32 @@ def set_background():
     st.markdown("""
         <style>
         html, body, [class*="stApp"] {
-            height: 100%;
-            margin: 0;
-            background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
+            background: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg") no-repeat center center fixed;
             background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
         }
 
         .block-container {
-            background-color: rgba(255, 255, 255, 0.25);  /* Light transparent overlay */
+            background-color: rgba(255, 255, 255, 0.3);  /* Adjust transparency here */
             padding: 2rem;
             border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
         }
 
-        .block-container .element-container {
-            color: black;
-        }
-
-        .stMarkdown, .stHeader, .stTextInput, .stButton, .stSelectbox, .stRadio {
+        .stMarkdown, .stHeader, .stTextInput, .stButton, .stSelectbox, .stRadio, .stTextArea {
             color: black !important;
         }
 
         input, textarea {
-            background-color: rgba(255, 255, 255, 0.8) !important;
+            background-color: rgba(255, 255, 255, 0.85) !important;
+            color: black !important;
+        }
+
+        .css-1y4p8pa, .css-1cpxqw2 {  /* Applies to titles/text blocks in newer Streamlit versions */
             color: black !important;
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 
 
