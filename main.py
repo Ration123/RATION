@@ -10,29 +10,37 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
-        .stApp {
+        html, body, [class*="stApp"] {
+            height: 100%;
+            margin: 0;
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
             background-size: cover;
-            background-attachment: fixed;
             background-repeat: no-repeat;
+            background-attachment: fixed;
             background-position: center;
         }
 
         .block-container {
-            background-color: rgba(255, 255, 255, 0.2); /* light transparent overlay */
+            background-color: rgba(255, 255, 255, 0.25);  /* Light transparent overlay */
             padding: 2rem;
             border-radius: 20px;
         }
 
         .block-container .element-container {
-            color: white;
+            color: black;
         }
 
         .stMarkdown, .stHeader, .stTextInput, .stButton, .stSelectbox, .stRadio {
-            color: white !important;
+            color: black !important;
+        }
+
+        input, textarea {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            color: black !important;
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 
 
