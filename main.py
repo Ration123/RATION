@@ -12,36 +12,40 @@ def set_background():
         <style>
         html, body, .stApp {
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
-            background-size: cover;
+            background-size: contain; /* Show full image without cropping */
             background-repeat: no-repeat;
-            background-position: top center;
-            background-attachment: scroll; /* Scrolls with content */
-            min-height: 100vh;
+            background-position: center top; /* Adjusted position */
+            background-attachment: local; /* Let content scroll over image */
+            height: 100%;
+            width: 100%;
         }
 
+        /* Content container styling */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.15); /* transparent white */
+            background-color: rgba(255, 255, 255, 0.2); /* Increased transparency */
             padding: 2rem;
             border-radius: 20px;
-            backdrop-filter: blur(4px);
-            margin-top: 50px;
+            backdrop-filter: blur(3px);
+            margin-top: 300px;  /* Push content down for full image view */
         }
 
+        /* Improve text readability */
         .stMarkdown, .stTextInput, .stTextArea, .stSelectbox, .stRadio, .stButton {
             color: black !important;
         }
 
         input, textarea {
-            background-color: rgba(255, 255, 255, 0.85) !important;
+            background-color: rgba(255, 255, 255, 0.8) !important;
             color: black !important;
         }
 
-        footer, header, .st-emotion-cache-1v0mbdj, .viewerBadge_container__1QSob {
+        /* Hide Streamlit menu and footer */
+        footer, header, .viewerBadge_container__1QSob, .st-emotion-cache-1v0mbdj {
             display: none !important;
         }
 
-        .css-164nlkn {
-            display: none !important; /* Extra GitHub icon area */
+        .stApp {
+            padding-top: 50px;
         }
         </style>
     """, unsafe_allow_html=True)
