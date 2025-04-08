@@ -16,7 +16,7 @@ def set_background():
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: center 150px;  /* Move image further down */
+            background-position: center 200px;  /* Move image further down */
             height: 100%;
             width: 100%;
         }
