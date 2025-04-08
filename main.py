@@ -10,47 +10,47 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
-        /* Set background image properly and scroll content */
+        /* Set the full-screen background image */
         html, body, .stApp {
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
-            background-attachment: fixed;
             background-size: cover;
-            background-position: center top;
             background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
         }
 
-        /* Transparent block container for content */
+        /* Make content container semi-transparent and scrollable */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.15); /* Light transparent white */
+            background-color: rgba(255, 255, 255, 0.1); /* More transparent */
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px); /* Optional blur for glassy effect */
         }
 
-        /* Text and input styles */
-        .stMarkdown, .stHeader, .stTextInput, .stButton, .stSelectbox, .stRadio, .stTextArea {
+        /* Make text black and inputs more readable */
+        .stMarkdown, .stTextInput, .stTextArea, .stSelectbox, .stRadio, .stButton {
             color: black !important;
         }
 
-        /* Light background for inputs */
         input, textarea {
             background-color: rgba(255, 255, 255, 0.8) !important;
             color: black !important;
         }
 
-        /* Hide footer and GitHub icon */
-        footer, header .stDeployButton, .css-164nlkn, .viewerBadge_container__1QSob {
+        /* Hide Streamlit default UI elements */
+        footer, header, .css-164nlkn, .viewerBadge_container__1QSob {
             display: none !important;
-            visibility: hidden;
         }
 
-        /* Optional: remove padding at the top */
+        /* Optional: remove padding above */
         .stApp {
-            padding-top: 30px;
+            padding-top: 20px;
         }
         </style>
     """, unsafe_allow_html=True)
-
 
 
 
