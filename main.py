@@ -33,11 +33,13 @@ def set_background():
         /* Improve text and input visibility */
         .stMarkdown, .stTextInput, .stTextArea, .stSelectbox, .stRadio, .stButton {
             color: black !important;
+            font-weight: 900 !important;
         }
 
         input, textarea {
             background-color: rgba(255, 255, 255, 0.85) !important;
             color: black !important;
+            font-weight: 900 !important;
         }
 
         /* Hide Streamlit UI Elements */
@@ -50,9 +52,6 @@ def set_background():
         }
         </style>
     """, unsafe_allow_html=True)
-
-
-
 
 # === Title Image ===
 def show_title_image():
@@ -113,12 +112,12 @@ menu = st.sidebar.radio("📂 Menu", [
 if menu == "🏠 Home":
     show_title_image()
     st.markdown(f"<h1 style='color:black; font-weight:900;'>{t('Welcome to Tamil Nadu Ration Shop Portal')}</h1>", unsafe_allow_html=True)
-    st.markdown(f"<p style='color:black; font-weight:700; font-size:18px;'>{t('This portal allows citizens to:')}</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color:black; font-weight:900; font-size:18px;'>{t('This portal allows citizens to:')}</p>", unsafe_allow_html=True)
 
     st.markdown(f"""
     <ul style='
         color: black;
-        font-weight: 700;
+        font-weight: 900;
         font-size: 16px;
         list-style-type: disc;
         margin-left: 20px;
@@ -131,10 +130,6 @@ if menu == "🏠 Home":
         <li>{t('Place orders & track status')}</li>
     </ul>
       """, unsafe_allow_html=True)
-
-
-
-  
 
 elif menu == "📊 Stock Availability":
     show_title_image()
