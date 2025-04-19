@@ -12,7 +12,7 @@ def set_background():
         <style>
         /* Background Image Styling */
         html, body, .stApp {
-            background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/ration.jpg");
+            background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/GRAIN.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: scroll;
