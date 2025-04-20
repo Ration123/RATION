@@ -160,14 +160,23 @@ elif menu == "🔐 Login / Signup":
                 st.subheader(t("Card Type: APL"))
                 st.write(t("🧾 Order Status: Not received this month "))
 
+                # State variable to trigger Place Order section
+                if "show_order_section" not in st.session_state:
+                    st.session_state.show_order_section = False
+
                 if st.button(t("Place Order")):
+                    st.session_state.show_order_section = True
+
+                if st.session_state.show_order_section:
                     quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
                     if quantity > 0:
                         price = (quantity / 100) * 10  # ₹10 per 100g
                         st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
+                        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/UPI-QR-code-example.svg/800px-UPI-QR-code-example.svg.png", width=250)
                         st.success(f"{t('Total Amount')}: ₹{price:.2f}")
         else:
             st.error("Invalid username or password")
+
 
 elif menu == "📬 Grievance":
     show_title_image()
