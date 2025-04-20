@@ -177,9 +177,10 @@ elif menu == "🔐 Login / Signup":
               st.subheader(t("Card Type: APL"))
               st.write(t("🧾 Order Status: Not received this month "))
 
-              quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=100, step=100)
+             
 
               if st.button(t("Place Order")):
+                quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
                 price = (quantity / 100) * 10  # ₹10 per 100g
                 st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
                 st.success(f"{t('Total Amount')}: ₹{price:.2f}")
