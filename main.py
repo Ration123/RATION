@@ -171,9 +171,7 @@ elif menu == "🔐 Login / Signup":
                    price = (quantity / 100) * 10  # ₹10 per 100g
                    st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
                    st.success(f"{t('Total Amount')}: ₹{price:.2f}")
-                   
-
-                   
+                   submitted = st.form_submit_button(t("Place Order"))
                      
 
 
