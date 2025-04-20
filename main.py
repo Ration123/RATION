@@ -6,7 +6,8 @@ import qrcode
 # === Dummy Credentials ===
 users = {"user1": "pass123", "user2": "pass456"}
 admins = {"admin1": "admin123"}
-
+def calculate_price(quantity):
+    return (quantity / 100) * 10
 # === Set Background ===
 def set_background():
     st.markdown("""
@@ -168,11 +169,10 @@ elif menu == "🔐 Login / Signup":
                 st.write(t("🧾 Order Status: Not received this month "))
                 with st.form("order_form", clear_on_submit=False):
                     quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100, key="quantity")
-                    submitted = st.form_submit_button(t("Place Order"))
-                    if submitted:
-                     price = (quantity / 100) * 10  # ₹10 per 100g
-                     st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
-                     st.success(f"{t('Total Amount')}: ₹{price:.2f}")
+                    submitted = st.form_submit_button(t("Place Order")
+                    price = calculate_price(quantity) # ₹10 per 100g
+                    st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
+                    st.success(f"{t('Total Amount')}: ₹{price:.2f}")
                      
 
 
