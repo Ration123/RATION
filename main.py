@@ -166,7 +166,7 @@ elif menu == "🔐 Login / Signup":
                 st.subheader(t("Card Type: APL"))
                 st.write(t("🧾 Order Status: Not received this month "))
                 with st.form("order_form", clear_on_submit=False):
-                submitted = st.form_submit_button(t("Place Order"))
+                  submitted = st.form_submit_button(t("Place Order"))
     
                 if submitted:
                    quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100, key="quantity")
