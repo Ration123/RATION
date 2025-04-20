@@ -176,7 +176,7 @@ elif menu == "🔐 Login / Signup":
                      qr_code.png('payment_qr.png', scale=10)
                      st.image('payment_qr.png', caption="Scan to Pay")
                    else:
-                        st.warning(t("Please enter a valid quantity")
+                        st.warning(t("Please enter a valid quantity"))
                    submitted = st.form_submit_button(t("Place Order"))
 
                    
