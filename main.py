@@ -159,17 +159,22 @@ elif menu == "🔐 Login / Signup":
             if role == t("User"):
                 st.subheader(t("Card Type: APL"))
                 st.write(t("🧾 Order Status: Not received this month "))
+           # Initialize session state for order button
             if "order_clicked" not in st.session_state:
-                st.session_state.order_clicked = False
+               st.session_state.order_clicked = False
 
+# Place Order button
             if st.button(t("Place Order")):
-              st.session_state.order_clicked = True
+                st.session_state.order_clicked = True
+
+# Show quantity input only if order button has been clicked
             if st.session_state.order_clicked:
-                    quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
-                    if quantity > 0:
-                        price = (quantity / 100) * 10  # ₹10 per 100g
-                        st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
-                        st.success(f"{t('Total Amount')}: ₹{price:.2f}")   
+    quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
+            if quantity > 0:
+                  price = (quantity / 100) * 10  # ₹10 per 100g
+                  st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
+                  st.success(f"{t('Total Amount')}: ₹{price:.2f}")
+ 
                     
         else:
             st.error("Invalid username or password")
