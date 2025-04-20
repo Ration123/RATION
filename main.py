@@ -159,6 +159,11 @@ elif menu == "🔐 Login / Signup":
             if role == t("User"):
                 st.subheader(t("Card Type: APL"))
                 st.write(t("🧾 Order Status: Not received this month "))
+            if "order_clicked" not in st.session_state:
+                st.session_state.order_clicked = False
+
+            if st.button(t("Place Order")):
+              st.session_state.order_clicked = True
             if st.button(t("Place Order")):
                     quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
                     if quantity > 0:
