@@ -146,7 +146,7 @@ elif menu == "📊 Stock Availability":
     src="{shop_map_urls[shop]}" allowfullscreen></iframe>
     """, unsafe_allow_html=True)
 
-elif menu == "🔐 Login / Signup":
+ elif menu == "🔐 Login / Signup":
         show_title_image()
         st.header("Login Portal")
         role = st.radio("Login as:", ["User", "Admin"])
@@ -156,26 +156,28 @@ elif menu == "🔐 Login / Signup":
         if st.button("Login"):
             if (role == "User" and users.get(username) == password) or (role == "Admin" and admins.get(username) == password):
                 st.success(f"Welcome {username}!")
-                
-                if role == "User":
-                    st.subheader("Card Type: APL")
-                    st.write("🧾 Order Status: Not received this month")
-
-                    if "order_clicked" not in st.session_state:
-                        st.session_state.order_clicked = False
-                    
-                    if st.button("Place Order"):
-                        st.session_state.order_clicked = True
-
-                    if st.session_state.order_clicked:
-                        quantity = st.number_input("Enter quantity of rice (in grams)", min_value=100, step=100)
-                        if quantity:
-                            price = (quantity / 100) * 10  # ₹10 per 100g
-                            st.write("💸 Pay via GPay: `upi@gov`")
-                            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/UPI-QR-code-example.svg/800px-UPI-QR-code-example.svg.png", width=250)
-                            st.success(f"Total Amount: ₹{price:.2f}")
+                st.session_state.logged_in = True
+                st.session_state.role = role
+                st.session_state.username = username
+                st.session_state.order_clicked = False
             else:
                 st.error("Invalid username or password")
+
+        # If logged in and user is a User
+        if st.session_state.get("logged_in") and st.session_state.get("role") == "User":
+            st.subheader("Card Type: APL")
+            st.write("🧾 Order Status: Not received this month")
+
+            if st.button("Place Order"):
+                st.session_state.order_clicked = True
+
+            if st.session_state.get("order_clicked"):
+                quantity = st.number_input("Enter quantity of rice (in grams)", min_value=100, step=100)
+                if quantity:
+                    price = (quantity / 100) * 10  # ₹10 per 100g
+                    st.write("💸 Pay via GPay: `upi@gov`")
+                    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/UPI-QR-code-example.svg/800px-UPI-QR-code-example.svg.png", width=250)
+                    st.success(f"Total Amount: ₹{price:.2f}")
 
 elif menu == "📬 Grievance":
     show_title_image()
