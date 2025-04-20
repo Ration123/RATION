@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import pyqrcode
-import png 
+import qrcode
+ 
 # === Dummy Credentials ===
 users = {"user1": "pass123", "user2": "pass456"}
 admins = {"admin1": "admin123"}
@@ -171,11 +171,7 @@ elif menu == "🔐 Login / Signup":
                    price = (quantity / 100) * 10  # ₹10 per 100g
                    st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
                    st.success(f"{t('Total Amount')}: ₹{price:.2f}")
-                   qr_data = f"upi://pay?pa=UPI@gov&pn=TamilNaduRationShop&mc=12345&tid=67890&tx=123456&amt={price:.2f}&cu=INR&url="
-                   qr_code = pyqrcode.create(qr_data)
-                   qr_code.png('payment_qr.png', scale=10)
-                   st.image('payment_qr.png', caption="Scan to Pay")
-                   submitted = st.form_submit_button(t("Place Order"))
+                   
 
                    
                      
