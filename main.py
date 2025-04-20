@@ -146,38 +146,28 @@ elif menu == "📊 Stock Availability":
     src="{shop_map_urls[shop]}" allowfullscreen></iframe>
     """, unsafe_allow_html=True)
 
- elif menu == "🔐 Login / Signup":
-        show_title_image()
-        st.header("Login Portal")
-        role = st.radio("Login as:", ["User", "Admin"])
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
+elif menu == "🔐 Login / Signup":
+    show_title_image()
+    st.header(t("Login Portal"))
+    role = st.radio(t("Login as:"), [t("User"), t("Admin")])
+    username = st.text_input(t("Username"))
+    password = st.text_input(t("Password"), type="password")
 
-        if st.button("Login"):
-            if (role == "User" and users.get(username) == password) or (role == "Admin" and admins.get(username) == password):
-                st.success(f"Welcome {username}!")
-                st.session_state.logged_in = True
-                st.session_state.role = role
-                st.session_state.username = username
-                st.session_state.order_clicked = False
-            else:
-                st.error("Invalid username or password")
+    if st.button(t("Login")):
+        if (role == t("User") and users.get(username) == password) or (role == t("Admin") and admins.get(username) == password):
+            st.success(f"{t('Welcome')} {username}!")
+            if role == t("User"):
+                st.subheader(t("Card Type: APL"))
+                st.write(t("🧾 Order Status: Not received this month "))
 
-        # If logged in and user is a User
-        if st.session_state.get("logged_in") and st.session_state.get("role") == "User":
-            st.subheader("Card Type: APL")
-            st.write("🧾 Order Status: Not received this month")
-
-            if st.button("Place Order"):
-                st.session_state.order_clicked = True
-
-            if st.session_state.get("order_clicked"):
-                quantity = st.number_input("Enter quantity of rice (in grams)", min_value=100, step=100)
-                if quantity:
-                    price = (quantity / 100) * 10  # ₹10 per 100g
-                    st.write("💸 Pay via GPay: `upi@gov`")
-                    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/UPI-QR-code-example.svg/800px-UPI-QR-code-example.svg.png", width=250)
-                    st.success(f"Total Amount: ₹{price:.2f}")
+                if st.button(t("Place Order")):
+                    quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
+                    if quantity > 0:
+                        price = (quantity / 100) * 10  # ₹10 per 100g
+                        st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
+                        st.success(f"{t('Total Amount')}: ₹{price:.2f}")
+        else:
+            st.error("Invalid username or password")
 
 elif menu == "📬 Grievance":
     show_title_image()
