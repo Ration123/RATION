@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import pyqrcode
+import png 
 # === Dummy Credentials ===
 users = {"user1": "pass123", "user2": "pass456"}
 admins = {"admin1": "admin123"}
@@ -174,8 +175,6 @@ elif menu == "🔐 Login / Signup":
                    qr_code = pyqrcode.create(qr_data)
                    qr_code.png('payment_qr.png', scale=10)
                    st.image('payment_qr.png', caption="Scan to Pay")
-                   if quantity<0:
-                    st.warning(t("Please enter a valid quantity"))
                    submitted = st.form_submit_button(t("Place Order"))
 
                    
