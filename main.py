@@ -10,43 +10,34 @@ admins = {"admin1": "admin123"}
 def set_background():
     st.markdown("""
         <style>
-        /* Background Image Styling */
         html, body, .stApp {
             background-image: url("https://raw.githubusercontent.com/Ration123/RATION/main/GRAIN.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: scroll;
-            background-position: center 200px;  /* Move image further down */
+            background-position: center 200px;
             height: 100%;
             width: 100%;
         }
-
-        /* Transparent container with blur effect */
         .block-container {
-            background-color: rgba(255, 255, 255, 0.10); /* more transparent */
+            background-color: rgba(255, 255, 255, 0.10);
             padding: 2rem;
             border-radius: 20px;
             backdrop-filter: blur(4px);
-            margin-top: 40px; /* Push content down */
+            margin-top: 40px;
         }
-
-        /* Improve text and input visibility */
         .stMarkdown, .stTextInput, .stTextArea, .stSelectbox, .stRadio, .stButton {
             color: black !important;
             font-weight: 900 !important;
         }
-
         input, textarea {
             background-color: rgba(255, 255, 255, 0.85) !important;
             color: black !important;
             font-weight: 900 !important;
         }
-
-        /* Hide Streamlit UI Elements */
         footer, header, .viewerBadge_container__1QSob, .st-emotion-cache-1v0mbdj {
             display: none !important;
         }
-
         .stApp {
             padding-top: 50px;
         }
@@ -81,6 +72,7 @@ def t(text):
         "Welcome": "வரவேற்கின்றோம்",
         "Card Type: APL": "அட்டை வகை: APL",
         "🧾 Order Status: Received this month ✔️": "🧾 ஆர்டர் நிலை: இந்த மாதம் பெற்றது ✔️",
+        "🧾 Order Status: Not received this month ": "🧾 ஆர்டர் நிலை: இந்த மாதம் பெறப்படவில்லை ",
         "💸 Pay via GPay: UPI@gov": "💸 GPay வழியாக செலுத்த: UPI@gov",
         "Place Order": "ஆர்டர் இடு",
         "Shop Purchase Log": "கடை வாங்கும் பதிவுகள்",
@@ -95,7 +87,9 @@ def t(text):
         "Your Message": "உங்கள் செய்தி",
         "Thank you! We received your feedback.": "நன்றி! உங்கள் கருத்தை பெற்றோம்.",
         "Language Switcher": "மொழி மாற்று",
-        "Use the checkbox in the sidebar to toggle between Tamil and English.": "தமிழ் மற்றும் ஆங்கிலத்தை மாற்ற பக்கப்பட்டி பெட்டியைப் பயன்படுத்தவும்."
+        "Use the checkbox in the sidebar to toggle between Tamil and English.": "தமிழ் மற்றும் ஆங்கிலத்தை மாற்ற பக்கப்பட்டி பெட்டியைப் பயன்படுத்தவும்.",
+        "Enter quantity of rice (in grams)": "அரிசி அளவை உள்ளிடவும் (கிராம்களில்)",
+        "Total Amount": "மொத்த தொகை"
     }.get(text, text) if lang_toggle else text
 
 # === Initialize ===
@@ -113,36 +107,26 @@ if menu == "🏠 Home":
     show_title_image()
     st.markdown(f"<h1 style='color:black; font-weight:900;'>{t('Welcome to Tamil Nadu Ration Shop Portal')}</h1>", unsafe_allow_html=True)
     st.markdown(f"<p style='color:black; font-weight:900; font-size:18px;'>{t('This portal allows citizens to:')}</p>", unsafe_allow_html=True)
-
     st.markdown(f"""
-    <ul style='
-        color: black;
-        font-weight: 900;
-        font-size: 16px;
-        list-style-type: disc;
-        margin-left: 20px;
-        background: none;
-        padding: 0;
-        border: none;
-    '>
-        <li>{t('Track shop stock')}</li>
-        <li>{t('Submit complaints')}</li>
-        <li>{t('Place orders & track status')}</li>
+    <ul style='color: black; font-weight: 900; font-size: 16px; list-style-type: disc; margin-left: 20px;'>
+        <li>{t('- Track shop stock')}</li>
+        <li>{t('- Submit complaints')}</li>
+        <li>{t('- Place orders & track status')}</li>
     </ul>
-      """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 elif menu == "📊 Stock Availability":
     show_title_image()
     st.header(t("Real-Time Stock"))
     shop = st.selectbox(t("Select Shop"), ["Shop 101 - Chennai", "Shop 102 - Madurai", "Shop 103 - Coimbatore"])
-    
+
     # Stock Data
     data = {
         "Shop 101 - Chennai": {"Rice": 100, "Sugar": 40, "Wheat": 0},
         "Shop 102 - Madurai": {"Rice": 80, "Sugar": 75, "Wheat": 60},
         "Shop 103 - Coimbatore": {"Rice": 30, "Sugar": 60, "Wheat": 90},
     }
-    
+
     df = pd.DataFrame(data[shop].items(), columns=["Item", "Quantity"])
     fig, ax = plt.subplots()
     ax.bar(df["Item"], df["Quantity"], color=['orange', 'green', 'blue'])
@@ -159,8 +143,7 @@ elif menu == "📊 Stock Availability":
 
     st.markdown(f"""
     <iframe width="100%" height="300" frameborder="0" style="border:0"
-    src="{shop_map_urls[shop]}" allowfullscreen>
-    </iframe>
+    src="{shop_map_urls[shop]}" allowfullscreen></iframe>
     """, unsafe_allow_html=True)
 
 elif menu == "🔐 Login / Signup":
@@ -174,21 +157,17 @@ elif menu == "🔐 Login / Signup":
         if (role == t("User") and users.get(username) == password) or (role == t("Admin") and admins.get(username) == password):
             st.success(f"{t('Welcome')} {username}!")
             if role == t("User"):
-              st.subheader(t("Card Type: APL"))
-              st.write(t("🧾 Order Status: Not received this month "))
+                st.subheader(t("Card Type: APL"))
+                st.write(t("🧾 Order Status: Not received this month "))
 
-             
-
-              if st.button(t("Place Order")):
-                quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
-                price = (quantity / 100) * 10  # ₹10 per 100g
-                st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
-                st.success(f"{t('Total Amount')}: ₹{price:.2f}")
-              
+                if st.button(t("Place Order")):
+                    quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
+                    if quantity > 0:
+                        price = (quantity / 100) * 10  # ₹10 per 100g
+                        st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
+                        st.success(f"{t('Total Amount')}: ₹{price:.2f}")
         else:
             st.error("Invalid username or password")
-
-    
 
 elif menu == "📬 Grievance":
     show_title_image()
