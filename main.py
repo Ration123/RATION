@@ -183,10 +183,7 @@ elif menu == "🔐 Login / Signup":
                 price = (quantity / 100) * 10  # ₹10 per 100g
                 st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
                 st.success(f"{t('Total Amount')}: ₹{price:.2f}")
-              else:
-                st.subheader(t("Shop Purchase Log"))
-                st.write("🧍‍♂️ Ramesh - Shop 101 - Rice - April 5")
-                st.write("🧍‍♀️ Sita - Shop 102 - Wheat - April 6")
+              
         else:
             st.error("Invalid username or password")
 
