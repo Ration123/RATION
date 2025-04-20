@@ -188,13 +188,7 @@ elif menu == "🔐 Login / Signup":
         else:
             st.error("Invalid username or password")
 
-    st.markdown("---")
-    st.subheader(t("New User Signup"))
-    new_user = st.text_input(t("New Username"))
-    new_pass = st.text_input(t("New Password"), type="password")
-    if st.button(t("Signup")):
-        # Just a mock message; no real signup logic
-        st.success(t("Account created."))
+    
 
 elif menu == "📬 Grievance":
     show_title_image()
