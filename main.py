@@ -164,7 +164,7 @@ elif menu == "🔐 Login / Signup":
 
             if st.button(t("Place Order")):
               st.session_state.order_clicked = True
-            if st.button(t("Place Order")):
+            if st.session_state.order_clicked:
                     quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=0, step=100)
                     if quantity > 0:
                         price = (quantity / 100) * 10  # ₹10 per 100g
