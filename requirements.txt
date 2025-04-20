@@ -1,8 +1,7 @@
-streamlit
-matplotlib
-numpy
-Pillow
-requests
-plotly
-pyqrcode
-png 
+streamlit==1.44.1
+matplotlib==3.10.1
+numpy==2.2.5
+Pillow==11.2.1  # Replacing png with Pillow
+requests==2.32.3
+plotly==6.0.1
+qrcode==7.3.1  # Replacing pyqrcode with qrcode
