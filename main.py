@@ -174,11 +174,16 @@ elif menu == "🔐 Login / Signup":
         if (role == t("User") and users.get(username) == password) or (role == t("Admin") and admins.get(username) == password):
             st.success(f"{t('Welcome')} {username}!")
             if role == t("User"):
-                st.subheader(t("Card Type: APL"))
-                st.write(t("🧾 Order Status: Received this month ✔️"))
-                st.write(t("💸 Pay via GPay: UPI@gov"))
-                st.button(t("Place Order"))
-            else:
+              st.subheader(t("Card Type: APL"))
+              st.write(t("🧾 Order Status: Not received this month "))
+
+              quantity = st.number_input(t("Enter quantity of rice (in grams)"), min_value=100, step=100)
+
+              if st.button(t("Place Order")):
+                price = (quantity / 100) * 10  # ₹10 per 100g
+                st.write(f"💸 {t('Pay via GPay: UPI@gov')}")
+                st.success(f"{t('Total Amount')}: ₹{price:.2f}")
+              else:
                 st.subheader(t("Shop Purchase Log"))
                 st.write("🧍‍♂️ Ramesh - Shop 101 - Rice - April 5")
                 st.write("🧍‍♀️ Sita - Shop 102 - Wheat - April 6")
