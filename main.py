@@ -159,7 +159,7 @@ elif menu == "🔐 Login / Signup":
             if role == t("User"):
                 st.subheader(t("Card Type: APL"))
                 st.write(t("🧾 Order Status: Not received this month "))
-                st.button(t("Place Order"))
+                
                     
         else:
             st.error("Invalid username or password")
